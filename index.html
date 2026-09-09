@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Philippine prescription of crimes computation aid for legal screening." />
+  <title>Prescription of Crimes Calculator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark" aria-hidden="true">§</div>
+    <div>
+      <p class="eyebrow">Philippine criminal law</p>
+      <h1 class="bubble-title" data-text="Prescription of Crimes Calculator">Prescription of Crimes Calculator</h1>
+    </div>
+    <button class="ghost" id="resetButton" type="button">Clear form</button>
+  </header>
+
+  <main class="workspace">
+    <form id="calculatorForm" class="form-panel">
+      <section class="card">
+        <div class="section-heading">
+          <span>1</span>
+          <div><h2>Offense and governing law</h2><p>Use the penalty prescribed by law, not the penalty eventually imposed.</p></div>
+        </div>
+
+        <div class="grid two">
+          <label>Governing law
+            <select id="lawType">
+              <option value="rpc">Revised Penal Code</option>
+              <option value="special">Special law</option>
+              <option value="ordinance">Municipal or city ordinance</option>
+            </select>
+          </label>
+          <label>Crime or offense
+            <input id="offenseName" list="crimeList" placeholder="Start typing, e.g. Unjust Vexation" autocomplete="off" />
+            <datalist id="crimeList"></datalist>
+          </label>
+        </div>
+
+        <div id="crimeMatch" class="crime-match hidden">
+          <div class="match-icon">✓</div>
+          <div><strong id="crimeMatchTitle"></strong><p id="crimeMatchText"></p></div>
+        </div>
+
+        <div id="rpcFields">
+          <label>Highest penalty prescribed by law
+            <select id="rpcPenalty">
+              <option value="">Select the highest prescribed penalty</option>
+              <option value="death-perpetua-temporal">Death, reclusion perpetua, or reclusion temporal</option>
+              <option value="other-afflictive">Other afflictive penalty</option>
+              <option value="correctional">Correctional penalty, except arresto mayor</option>
+              <option value="arresto-mayor">Arresto mayor</option>
+              <option value="libel">Libel or similar offense</option>
+              <option value="oral-defamation">Oral defamation or slander by deed</option>
+              <option value="light">Light offense</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="specialFields" class="hidden grid two">
+          <label>Maximum imprisonment under the special law
+            <select id="specialPenalty">
+              <option value="">Select maximum imprisonment</option>
+              <option value="over6">6 years or more</option>
+              <option value="2to6">2 years or more, but less than 6 years</option>
+              <option value="1to2">More than 1 month, but less than 2 years</option>
+              <option value="underMonth">1 month or less</option>
+              <option value="fineOnly">Fine only</option>
+              <option value="ownPeriod">The special law states its own period</option>
+            </select>
+          </label>
+          <label id="customPeriodWrap" class="hidden">Period stated by the law
+            <div class="joined"><input id="customPeriod" type="number" min="1" placeholder="e.g. 5" /><select id="customUnit"><option value="years">Years</option><option value="months">Months</option><option value="days">Days</option></select></div>
+          </label>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-heading">
+          <span>2</span>
+          <div><h2>Key dates</h2><p>The reckoning date may be the commission or discovery date, depending on the governing law and facts.</p></div>
+        </div>
+        <div class="grid two">
+          <label>Crime committed <b>*</b><input id="commissionDate" type="date" required /></label>
+          <label>Date discovered <small>(if later and legally applicable)</small><input id="discoveryDate" type="date" /></label>
+        </div>
+        <label class="check-row"><input id="useDiscovery" type="checkbox" /><span><strong>Use discovery date as reckoning date</strong><small>Select only when the applicable rule permits reckoning from discovery.</small></span></label>
+      </section>
+
+      <section class="card">
+        <div class="section-heading">
+          <span>3</span>
+          <div><h2>Barangay conciliation</h2><p>Determine whether prior confrontation and a Certificate to File Action were required.</p></div>
+        </div>
+        <div class="segmented" role="group" aria-label="Was a barangay complaint filed?">
+          <input type="radio" name="barangay" id="brgyNo" value="no" checked /><label for="brgyNo">No barangay filing</label>
+          <input type="radio" name="barangay" id="brgyYes" value="yes" /><label for="brgyYes">Barangay complaint filed</label>
+        </div>
+        <div id="barangayFields" class="hidden grid two top-gap">
+          <label>Barangay complaint filed <b>*</b><input id="barangayFiled" type="date" /></label>
+          <label>Certificate to File Action issued / received<input id="certificateDate" type="date" /></label>
+        </div>
+        <details class="eligibility">
+          <summary>Check whether barangay conciliation was required</summary>
+          <div class="checklist">
+            <label><input type="checkbox" id="sameCity" /> Parties actually reside in the same city or municipality (subject to statutory venue rules)</label>
+            <label><input type="checkbox" id="privateParty" /> No government or public officer acting officially is a party</label>
+            <label><input type="checkbox" id="withinPenalty" /> Offense is punishable by no more than 1 year imprisonment or ₱5,000 fine</label>
+            <label><input type="checkbox" id="privateOffense" /> Offense has a private offended party</label>
+            <label><input type="checkbox" id="noUrgency" /> No urgent legal action or another statutory exception applies</label>
+          </div>
+          <p id="barangayAdvice" class="advice neutral">Answer all five items for a preliminary barangay assessment.</p>
+        </details>
+      </section>
+
+      <section class="card">
+        <div class="section-heading">
+          <span>4</span>
+          <div><h2>Prosecutor or court filing</h2><p>Enter the date proceedings were instituted against the respondent or accused.</p></div>
+        </div>
+        <label>Complaint or information filed <b>*</b><input id="prosecutorDate" type="date" required /></label>
+      </section>
+
+      <button class="primary" type="submit">Compute prescription</button>
+    </form>
+
+    <aside class="result-panel" aria-live="polite">
+      <div id="emptyResult" class="empty-state"><div class="empty-icon">⌛</div><h2>Ready to compute</h2><p>Complete the dates and applicable penalty. Your computation timeline will appear here.</p></div>
+      <div id="resultContent" class="hidden">
+        <div class="result-header"><p class="eyebrow">Screening result</p><div id="statusBadge" class="status"></div><h2 id="resultTitle"></h2><p id="resultSubtitle"></p></div>
+        <div class="metric-grid">
+          <div><small>Classification</small><strong id="classification"></strong></div>
+          <div><small>Prescriptive period</small><strong id="period"></strong></div>
+          <div><small>Reckoning date</small><strong id="reckoning"></strong></div>
+          <div><small>Computed deadline</small><strong id="deadline"></strong></div>
+        </div>
+        <h3>Computation timeline</h3>
+        <ol id="timeline" class="timeline"></ol>
+        <div class="notice"><strong>Legal review required</strong><p>This calculator is a screening aid. Verify the precise statutory penalty, amendments, continuing-offense rules, discovery rule, exclusions, and controlling jurisprudence before relying on the result.</p></div>
+        <button class="print" id="printButton" type="button">Print computation</button>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    <p>Legal bases: <a href="https://lawphil.net/statutes/acts/act1930/act_3815_1930b.html" target="_blank" rel="noreferrer">Revised Penal Code, Arts. 90–91</a> · <a href="https://lawphil.net/statutes/acts/act1926/act_3326_1926.html" target="_blank" rel="noreferrer">Act No. 3326</a> · <a href="https://lawphil.net/statutes/repacts/ra1991/ra_7160_1991.html" target="_blank" rel="noreferrer">Local Government Code, secs. 408–412</a></p>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
