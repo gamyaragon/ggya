@@ -48,8 +48,10 @@ input:focus,select:focus{border-color:#f05cae;box-shadow:0 0 0 4px rgba(255,94,1
 .empty-icon{border-radius:50%;background:linear-gradient(145deg,#ff9dd1,#eb3c9b);color:#fff;box-shadow:inset 5px 6px 8px rgba(255,255,255,.48),inset -4px -5px 8px rgba(145,8,78,.23),0 10px 22px rgba(187,32,111,.24)}
 .crime-match{border-color:rgba(255,157,206,.82);background:rgba(255,238,247,.75);border-radius:16px}.match-icon{background:linear-gradient(145deg,#ff78c1,#d91b80);box-shadow:inset 2px 3px 4px rgba(255,255,255,.45)}
 .print{border-color:#e72b91;color:#b71169;background:rgba(255,255,255,.66);border-radius:14px}
-footer{background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.72);border-radius:18px;padding:14px 20px;margin-bottom:28px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:#69536e}
+footer{display:flex;align-items:center;justify-content:space-between;gap:18px;background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.72);border-radius:18px;padding:14px 20px;margin-bottom:28px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:#69536e}
+footer p{margin:0}
 footer a{color:#a31566}
+.creator-credit{flex:0 0 auto;color:#b31570;font-family:"Arial Rounded MT Bold","Trebuchet MS",sans-serif;font-weight:800;text-align:right;letter-spacing:.02em;white-space:nowrap}
 @media(max-width:700px){body{background-attachment:scroll}.topbar{min-height:102px}.topbar h1{font-size:1.28rem;text-shadow:0 1px 0 #fff,0 2px 0 #ef8fc2,0 4px 8px rgba(112,24,81,.24)}.brand-mark{width:48px;height:48px;border-radius:17px}.card,.result-panel{border-radius:19px}}
 
 /* Inflated balloon title */
@@ -57,3 +59,4 @@ footer a{color:#a31566}
 .topbar .bubble-title::before{content:attr(data-text);position:absolute;inset:0;z-index:1;color:transparent;background:linear-gradient(180deg,#fff 0%,#ffd8ec 18%,#ff86c8 38%,rgba(255,255,255,0) 58%);-webkit-background-clip:text;background-clip:text;-webkit-text-stroke:0;opacity:.78;pointer-events:none;transform:translateY(-1px)}
 .topbar .bubble-title::after{content:attr(data-text);position:absolute;inset:0;z-index:-1;color:#b50b65;-webkit-text-stroke:3px #b50b65;transform:translateY(4px);filter:blur(.15px);pointer-events:none}
 @media(max-width:700px){.topbar .bubble-title{font-size:1.25rem;letter-spacing:-.045em;-webkit-text-stroke:1px #c20a6c;text-shadow:0 1px 0 #ffb8df,0 2px 0 #e647a1,0 3px 0 #a8075c,0 7px 11px rgba(74,74,128,.23)}.topbar .bubble-title::after{transform:translateY(2px);-webkit-text-stroke:2px #b50b65}}
+@media(max-width:700px){footer{gap:10px;padding:12px 14px;font-size:.7rem}.creator-credit{font-size:.68rem}}
