@@ -5,11 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Philippine prescription of crimes computation aid for legal screening." />
   <title>Prescription of Crimes Calculator</title>
+  <link rel="icon" type="image/png" href="ggya-logo.png" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="topbar">
-    <div class="brand-mark" aria-hidden="true">§</div>
+    <img class="brand-logo" src="ggya-logo.png" alt="GGYA scales of justice logo" />
     <div>
       <p class="eyebrow">Philippine criminal law</p>
       <h1 class="bubble-title" data-text="Prescription of Crimes Calculator">Prescription of Crimes Calculator</h1>
@@ -17,11 +18,11 @@
     <button class="ghost" id="resetButton" type="button">Clear form</button>
   </header>
 
-  <section class="usage-stats" aria-label="Calculator usage statistics">
+  <aside class="usage-stats" aria-label="Calculator usage statistics">
     <div class="usage-stat"><span class="usage-icon" aria-hidden="true">👁</span><div><small>Total visitors</small><strong id="visitorCount">—</strong></div></div>
     <div class="usage-stat"><span class="usage-icon" aria-hidden="true">🧮</span><div><small>Calculations made</small><strong id="calculationCount">—</strong></div></div>
     <p id="analyticsStatus" class="analytics-status">Loading public usage totals…</p>
-  </section>
+  </aside>
 
   <main class="workspace">
     <form id="calculatorForm" class="form-panel">
